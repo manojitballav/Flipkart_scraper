@@ -25,19 +25,19 @@ def sreview(r_link,pn,pc):
         for kal in range(3,13):
             kal = str(kal)
             try:
-                read = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div['+kal+']/div/div/div/div[2]/div/div/span/span').click()
+                read = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[2]/div/div/span/span').click()
             except Exception as e:
                 pass
             try:
-                rating = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div['+kal+']/div/div/div/div[1]/div').text
+                rating = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[1]/div').text
             except Exception as e:
                 print(e)
             try:
-                heading = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div['+kal+']/div/div/div/div[1]/p').text
+                heading = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[1]/p').text
             except Exception as e:
                 print(e)
             try:
-                body = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div/div[2]/div['+kal+']/div/div/div/div[2]/div/div/div').text
+                body = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[2]/div/div/div').text
             except Exception as e:
                 print(e)
             r_update(rating,heading,body,pc)
