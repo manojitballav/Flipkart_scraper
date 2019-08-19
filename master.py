@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium import *
 
 # connection to the db
-client = MongoClient('10.56.133.21',27017)
+client = MongoClient('127.0.0.1',27017)
 db = client['flipkart']
 col1 = db['r_data']
 # webdrive connection
@@ -45,7 +45,7 @@ def sreview(r_link,pn,pc):
     driver.quit()
 
 def read():
-    for dic in col1.find({}):
+    for dic in col1.find({'db':{"$in":["enter db name1","enter db name2 "]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
