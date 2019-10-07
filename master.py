@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium import *
 
 # connection to the db
-client = MongoClient('10.56.133.21',27017)
+client = MongoClient('127.0.0.1',27017)
 db = client['flipkart']
 col1 = db['r_data']
 # webdrive connection
