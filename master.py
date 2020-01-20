@@ -45,7 +45,7 @@ def sreview(r_link,pn,pc):
     driver.quit()
 
 def read():
-    for dic in col1.find({'db':{"$in":["MOBFKPYDTSZ8SFHH"]}}):
+    for dic in col1.find({'db':{"$in":["MOBFKF98HGWKEDCC"]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
