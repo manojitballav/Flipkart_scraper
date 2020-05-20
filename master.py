@@ -6,9 +6,9 @@ from selenium import *
 
 # connection to the db
 client = MongoClient('10.56.133.247',27017)
-db = client['MiTV']
-col1 = db['flipkart']
-# webdrive connection
+db = client['Soundbar']
+col1 = db['r_data']
+# webdriver connection
 driver = webdriver.Firefox()
 
 def r_update(rating,heading,body,pc):
@@ -20,7 +20,8 @@ def sreview(r_link,pn,pc):
     rating = 0
     heading = 0
     body = 0
-    for val in range(436,int(pn)+1):
+    # griver = webdriver.Firefox()
+    for val in range(1,int(pn)+1):
         driver.get(r_link+str(val))
         for kal in range(3,13):
             kal = str(kal)
@@ -44,20 +45,20 @@ def sreview(r_link,pn,pc):
             except Exception as e:
                 print(e)
             r_update(rating,heading,body,pc)
-            time.sleep(1)
+            # time.sleep(5)
     driver.quit()
 
 def read():
-    for dic in col1.find({'db':{"$in":["TVSFDWH5K9N2FDTK"]}}):
+    for dic in col1.find({'db':{"$in":["ACCFE5HS2YP2ZZBE"]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
         driver.get(link)
-        review = int(25725)
+        review = int(4705)
         # try:
         #     review = 0
         #     if(review == 0):
-        #         review = (driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div[1]/div[2]/div[2]/div/div[2]/div/div/span[2]/span/span[3]').text)
+        #         review = (driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[1]/div[2]/div[2]/div/div[2]/div/div/span[2]/span/span[3]').text)
         #         review = review.replace(' Reviews','')
         #         review = review.replace(' ','')
         #         review = review.replace(',','')
@@ -65,9 +66,10 @@ def read():
         #         review = (driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div[2]/div[1]/div[2]/div[2]/div/div[2]/div/div/span[2]/span/span[3]').text)
         # except Exception as NoSuchElementException:
         #     pass
-        #     print("No element found")
+            # print("No element found")
         print(review)
         pn = (int(review)//10)
+        # driver.quit()
         sreview(r_link,pn,pc)
 
 def main():
