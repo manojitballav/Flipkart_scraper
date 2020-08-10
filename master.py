@@ -9,7 +9,7 @@ client = MongoClient('10.56.133.247',27017)
 db = client['flipkart']
 col1 = db['r_data']
 # webdriver connection
-driver = webdriver.Chrome()
+driver = webdriver.Firefox()
 
 def r_update(rating,heading,body,pc):
     col2 = db[pc]
