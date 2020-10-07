@@ -23,8 +23,10 @@ def sreview(r_link,pn,pc):
     heading = 0
     body = 0
     date = 0
+    count = 1
     # griver = webdriver.Firefox()f
     for val in range(1,int(pn)+1):
+        
         driver.get(r_link+str(val))
         for kal in range(3,13):
             kal = str(kal)
@@ -34,17 +36,14 @@ def sreview(r_link,pn,pc):
                 pass
             try:
                 rating = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[1]/div').text
-                print(rating)
             except Exception as e:
                 print(e)
             try:
                 heading = driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[1]/p').text
-                print(heading)
             except Exception as e:
                 print(e)
             try:
                 body = driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div[2]/div['+kal+']/div/div/div/div[2]/div/div/div').text
-                print(body)
             except Exception as e:
                 print(e)
             try:
@@ -67,9 +66,10 @@ def sreview(r_link,pn,pc):
                 # convert today into date
                 x = datetime.now()
                 date = (x.strftime("%d"+"/"+"%m"+"/"+"%Y"))
-            print(date)
+            count+=1
             r_update(rating,heading,body,date,pc)
             # time.sleep(5)
+    print(str(count) + " pages scraped for "+str(pc))
     driver.quit()
 
 def read():
