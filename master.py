@@ -5,11 +5,11 @@ from selenium import webdriver
 from selenium import *
 
 # connection to the db
-client = MongoClient('10.56.133.247',27017)
-db = client['Soundbar']
+client = MongoClient('10.56.146.102',27017)
+db = client['flipkart']
 col1 = db['r_data']
 # webdriver connection
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 
 def r_update(rating,heading,body,pc):
     col2 = db[pc]
@@ -20,7 +20,7 @@ def sreview(r_link,pn,pc):
     rating = 0
     heading = 0
     body = 0
-    # griver = webdriver.Firefox()
+    # griver = webdriver.Firefox()f
     for val in range(1,int(pn)+1):
         driver.get(r_link+str(val))
         for kal in range(3,13):
@@ -49,12 +49,12 @@ def sreview(r_link,pn,pc):
     driver.quit()
 
 def read():
-    for dic in col1.find({'db':{"$in":["ACCFE5HS2YP2ZZBE"]}}):
+    for dic in col1.find({'db':{"$in":["MOBFVEATBBRGJBKH"]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
         driver.get(link)
-        review = int(4705)
+        review = int(1916)
         # try:
         #     review = 0
         #     if(review == 0):
