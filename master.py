@@ -8,14 +8,23 @@ from datetime import date
 
 # connection to the db
 client = MongoClient('10.56.146.102',27017)
+
+# For phones
 db = client['flipkart']
 col1 = db['r_data']
+
+# For TV
+# db = client['MiTV']
+# col1 = db['flipkart']
+
 # webdriver connection
-driver = webdriver.Chrome()
+op = webdriver.ChromeOptions()
+op.add_argument('headless')
+driver = webdriver.Chrome(options=op)
 
 def r_update(rating,heading,body,date,pc):
     col2 = db[pc]
-    col2.update_one({"body": body},{'$set':{"body":body,"rating":rating,"heading":heading,"date":date}},upsert=True)
+    col2.update_one({"body": body,"rating":rating,"date":date},{'$set':{"body":body,"rating":rating,"heading":heading,"date":date}},upsert=True)
 
 def sreview(r_link,pn,pc):
     read = 0
@@ -23,9 +32,9 @@ def sreview(r_link,pn,pc):
     heading = 0
     body = 0
     date = 0
-    count = 1
+    count = 0
     # griver = webdriver.Firefox()f
-    for val in range(1,int(pn)+1):
+    for val in range(1,int(pn)+2):
         
         driver.get(r_link+str(val))
         for kal in range(3,13):
@@ -73,12 +82,12 @@ def sreview(r_link,pn,pc):
     driver.quit()
 
 def read():
-    for dic in col1.find({'db':{"$in":["MOBFVQJ5TZTF5JHC"]}}):
+    for dic in col1.find({'db':{"$in":["MOBFVQJ5HUBH33YX"]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
         driver.get(link)
-        review = int(317)
+        review = int(463)
         # try:
         #     review = 0
         #     if(review == 0):
