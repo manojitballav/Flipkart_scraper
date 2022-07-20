@@ -7,15 +7,15 @@ from datetime import datetime, timedelta
 from datetime import date
 
 # connection to the db
-client = MongoClient('')
+client = MongoClient('10.56.146.102',27017)
 
 # For phones
-db = client['flipkart']
-col1 = db['r_data']
+# db = client['flipkart']
+# col1 = db['r_data']
 
 # For TV
-# db = client['MiTV']
-# col1 = db['flipkart']
+db = client['MiTV']
+col1 = db['flipkart']
 
 # webdriver connection
 op = webdriver.ChromeOptions()
@@ -84,12 +84,12 @@ def sreview(r_link,pn,pc):
     driver.quit()
 
 def read():
-    for dic in col1.find({'db':{"$in":["MOBFZTCUKKJEYTR4"]}}):
+    for dic in col1.find({'db':{"$in":["TVSG5ZGZQKRDMQVZ"]}}):
         link = dic['link']
         r_link = dic['r_link']
         pc = dic['db']
         driver.get(link)
-        review = int(696)
+        review = int(3791)
         # try:
         #     review = 0
         #     if(review == 0):
