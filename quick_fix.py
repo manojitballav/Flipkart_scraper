@@ -1,3 +1,4 @@
+from lib2to3.pgen2 import driver
 from typing import Collection
 # from bson.py3compat import reraise_instances
 from pymongo import MongoClient
@@ -15,10 +16,14 @@ db = client['MiTV']
 collection = db['flipkart']
 
 # function to get the product details
+# chrome with headless
+# op = webdriver.ChromeOptions()
+# op.add_argument('headless')
+# driver = webdriver.Chrome(options=op)
 
-op = webdriver.ChromeOptions()
-op.add_argument('headless')
-driver = webdriver.Chrome(options=op)
+# chrome full view
+driver = webdriver.Chrome()
+
 # driver = webdriver.Firefox()
 
 def get_reviews(fsn,rlink,reviews):
@@ -26,7 +31,7 @@ def get_reviews(fsn,rlink,reviews):
     col = db[fsn]
     for val in range(1,page+1):
         driver.get(rlink+str(val))
-        time.sleep(2)
+        time.sleep(5)
         for kal in range(3,13):
             kal = str(kal)
             try:
@@ -68,8 +73,8 @@ def get_reviews(fsn,rlink,reviews):
 
                 # check to not insert blank fields
                 if (rating != None):
-                    # col.update_one({'user':user},{'$set':{'rating':rating,'heading':heading,'body':body,'user':user}})
-                    col.insert_one({'rating':rating,'heading':heading,'body':body,'user':user})               
+                    col.update_one({'user':user},{'$set':{'rating':rating,'heading':heading,'body':body,'user':user}})
+                    # col.insert_one({'rating':rating,'heading':heading,'body':body,'user':user})               
                 else:
                     pass
                 # rendering all the variables to null
@@ -85,7 +90,10 @@ if __name__ == '__main__':
     # get the product details
     for doc in collection.find({'fsn':{"$in":["TVSG5ZGZQKRDMQVZ"]}}):
         fsn = doc['fsn']
-        rlink = doc['r_link']
+        rlink = doc['rlink']
         reviews = doc['reviews']
+        print(fsn)
+        print(rlink)
+        print(reviews)
         get_reviews(fsn,rlink,reviews)
         driver.quit()
